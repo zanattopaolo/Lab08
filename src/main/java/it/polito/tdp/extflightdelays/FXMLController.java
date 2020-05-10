@@ -35,7 +35,24 @@ public class FXMLController {
 
     @FXML
     void doAnalizzaAeroporti(ActionEvent event) {
-    	//TODO
+    	//controlli sul dato inserito
+    	int dMin=0;
+    	try {
+    		dMin=Integer.parseInt(this.distanzaMinima.getText());
+    	}
+    	catch(Exception e) {
+    		this.txtResult.setText("E' stato inserito un valore errato");
+    	}
+    	
+    	//chiamata della funzione
+    	this.model.creaGrafoDistanzaMedia(dMin);
+    	
+    	//stampa esito
+    	double start=System.currentTimeMillis();
+    	this.txtResult.setText("Il grafo contiene "+model.getNumAirport()+" aeroporti e "+model.getNumEdge()+" voli\n"+model.getEdges());
+    	double end=System.currentTimeMillis();
+    	this.txtResult.appendText("Tempo: "+(end-start));
+    	
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
